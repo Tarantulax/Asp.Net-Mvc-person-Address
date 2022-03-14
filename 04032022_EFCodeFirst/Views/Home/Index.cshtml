@@ -1,0 +1,64 @@
+﻿@using _04032022_EFCodeFirst.Models
+@model KisilerveAdresleri
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<h3>Home Page</h3>
+<div class="container-fluid">
+    <div class="col-md-6"> 
+        <div>
+            @Html.ActionLink("Yeni Kişi", "Yeni", "Kisi", null, new { @class="btn btn-primary" })
+        <br /><br />
+        </div>
+
+        <ul class="list-group">
+            <li class="list-group-item">  
+            <h3> Kişiler </h3> 
+            </li>
+
+            @foreach (var kisi in Model.Kisiler)
+            {
+        <li class="list-group-item">
+
+            @Html.ActionLink("Düzenle", "Duzenle", "Kisi", new { kisiid=kisi.ID }, new { @class = "btn btn-warning btn-xs" })
+            @Html.ActionLink("Sil", "Sil", "Kisi", new { kisiid = kisi.ID }, new { @class = "btn btn-danger btn-xs" })
+
+
+            <span class="glyphicon glyphicon-user green">
+            </span>
+            @(kisi.Ad+" "+kisi.Soyad)
+            (<i>@kisi.Yas</i>)
+
+            <br />
+        </li>
+            }
+        </ul>
+    </div>
+
+    <div class="col-md-6"> 
+        <div>
+            @Html.ActionLink("Yeni Adres", "Yeni", "Adres", null, new { @class = "btn btn-primary" })
+            <br /><br />
+        </div>
+
+        <ul class="list-group">
+            <li class="list-group-item">
+                <h3> Adresler </h3>
+            </li>
+            @foreach (var adres in Model.Adresler)
+            {
+        <li class="list-group-item">
+
+            @Html.ActionLink("Düzenle", "Duzenle", "Adres", new { adresid=adres.ID }, new { @class = "btn btn-warning btn-xs" })
+            @Html.ActionLink("Sil", "Sil", "Adres", new { adresid = adres.ID }, new { @class = "btn btn-danger btn-xs" })
+            <span class="glyphicon glyphicon-home red">
+            </span>
+            @adres.AdresTanim
+            (<i> @(adres.Kisi.Ad+" "+adres.Kisi.Soyad)</i>)
+            <br />
+        </li>
+            }
+        </ul>
+    </div>
+</div>

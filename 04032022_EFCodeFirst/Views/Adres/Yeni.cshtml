@@ -1,0 +1,36 @@
+﻿
+@model Adresler
+@{
+    ViewBag.Title = "Yeni Adres";
+}
+
+<h2>Yeni Adres</h2>
+<hr />
+
+@using (Html.BeginForm())
+{
+    <div class="input-group">
+        <span class="input-group-addon">Adres </span>
+        @Html.TextAreaFor(x => x.AdresTanim, new { @class = "form-control", placeholder = "Yeni Adres", @required = "required", rows=5 })
+
+    </div>
+    <br />
+    <div class="input-group">
+        <span class="input-group-addon">Kişi </span>
+        @Html.DropDownListFor(x => x.Kisi.ID, (List<SelectListItem>)ViewBag.kisiler, new { @class = "form-control" })
+    </div>
+    <br />
+
+    <div class="input-group">
+        <input type="submit" value="Kaydet" class="btn btn-success" />
+    </div>
+}
+<br />
+<div class="input-group">
+    @if (ViewBag.mesaj != null)
+    {
+        <div class="alert alert-@ViewBag.renk" role="alert">
+            @ViewBag.mesaj
+        </div>
+    }
+</div>
